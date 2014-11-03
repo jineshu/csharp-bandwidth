@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BandwidthClient.cs" />
+    <Compile Include="BandwidthConstants.cs" />
+    <Compile Include="BandwidthRestClient.cs" />
     <Compile Include="Clients\Account.cs" />
     <Compile Include="Clients\Applications.cs" />
     <Compile Include="Clients\AvailableNumbers.cs" />
@@ -75,15 +78,23 @@
     <Compile Include="Events\Conference.cs" />
     <Compile Include="Events\ConferencePlayback.cs" />
     <Compile Include="Events\Hangup.cs" />
-    <Compile Include="Events\IncomingCall.cs" />
+    <Compile Include="Events\IncomingCall.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Events\Recording.cs" />
     <Compile Include="Events\Playback.cs" />
     <Compile Include="Events\Reject.cs" />
     <Compile Include="Events\Speak.cs" />
     <Compile Include="Events\Sms.cs" />
+    <Compile Include="IBandwidthClient.cs" />
+    <Compile Include="Model\BaseModelObject.cs" />
+    <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\ResourceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
     <Compile Include="Data\Recording.cs" />
+    <Compile Include="RestResponse.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">

@@ -180,3 +180,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+Bandwidth.Net/Events/IncomingCall.cs
+Bandwidth.Net/Events/IEvent.cs
+Bandwidth.Net/Events/IncomingCall.cs
+Bandwidth.Net/Events/IncomingCall.cs
