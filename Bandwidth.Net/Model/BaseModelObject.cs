@@ -14,13 +14,13 @@ namespace Bandwidth.Net.Model
         protected BaseModelObject(BandwidthRestClient client, JObject jsonObject)
         {
             this.client = client;
-            updateProperties(jsonObject);
+            UpdateProperties(jsonObject);
         }
 
         protected BaseModelObject(BandwidthRestClient client, String parentUri, JObject jsonObject)
         {
             this.client = client;
-            updateProperties(jsonObject);
+            UpdateProperties(jsonObject);
         }
 
         protected BandwidthRestClient GetClient()

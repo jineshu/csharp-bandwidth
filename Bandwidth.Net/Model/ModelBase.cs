@@ -12,7 +12,7 @@ namespace Bandwidth.Net.Model
         protected internal readonly Dictionary<string, object> properties
             = new Dictionary<string, object>();
 
-        protected void updateProperties(JObject jsonObject)
+        protected void UpdateProperties(JObject jsonObject)
         {
             if (jsonObject != null)
             {
@@ -38,7 +38,6 @@ namespace Bandwidth.Net.Model
         {
             if (properties.ContainsKey(key))
             {
-                //TODO : [SuppressWarnings("unchecked")]
                 object o = null;
                 properties.TryGetValue(key, out o);
                 List<object> list = (List<object>)o;
@@ -94,7 +93,7 @@ namespace Bandwidth.Net.Model
                 return Convert.ToDouble(o);
         }
 
-        protected DateTime? getPropertyAsDate(String key)
+        protected DateTime? GetPropertyAsDate(String key)
         {
             Object o;
             properties.TryGetValue(key, out o);
@@ -109,7 +108,5 @@ namespace Bandwidth.Net.Model
         {
             properties.Add(key, value);
         }
-
-
     }
 }

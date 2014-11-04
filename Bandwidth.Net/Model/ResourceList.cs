@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Bandwidth.Net.Model
 {
-    public class ResourceList<T> : List<T> where T :class
+    public class ResourceList<T> : List<T> 
     {
         protected int page;
         protected int size;
@@ -42,17 +42,17 @@ namespace Bandwidth.Net.Model
         public ResourceList(int page, int size, String resourceUri, T clazz)
             : base()
         {
-
             this.page = page;
             this.size = size;
             this.resourceUri = resourceUri;
             this.clazz = clazz;
         }
 
-        /**
-	 * initializes ArrayList with first page from BW API
-	 */
-
+       
+       /// <summary>
+        /// initializes ArrayList with first page from BW API
+       /// </summary>
+ 
         public void Initialize()
         {
             JObject jsonParams = new JObject();
@@ -63,10 +63,9 @@ namespace Bandwidth.Net.Model
             GetPage(jsonParams);
         }
 
-        /**
-	 * This method updates the page value, creates the params for the API call and clears the current list
-	 */
-
+        /// <summary>
+        /// This method updates the page value, creates the params for the API call and clears the current list
+        /// </summary>
         protected void GetNextPage()
         {
             JObject jObjectParams = new JObject();
@@ -79,12 +78,12 @@ namespace Bandwidth.Net.Model
             GetPage(jObjectParams);
         }
 
-        /**
-	 * This method makes the API call to get the list value for the specified resource. It loads the return
-	 * from the API into the arrayList, updates the index if necessary and sets the new link values
-	 * @jsonParams params
-	 */
-
+        /// <summary>
+        /// This method makes the API call to get the list value for the specified resource. It loads the return
+	    ///from the API into the arrayList, updates the index if necessary and sets the new link values
+	    ///@jsonParams params
+        /// </summary>
+        /// <param name="jsonParams"></param>
         protected void GetPage(JObject jsonParams)
         {
 
@@ -98,7 +97,7 @@ namespace Bandwidth.Net.Model
             foreach (Object obj in array)
             {
                 Type type = typeof(T);
-                T elem = Activator.CreateInstance(type, new[] { typeof(BandwidthClient), typeof(JObject) }) as T;
+                T elem = (T)Activator.CreateInstance(type, new[] { client, obj });
                 Add(elem);
             }
 
