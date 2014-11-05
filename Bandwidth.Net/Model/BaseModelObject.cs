@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bandwidth.Net.Model
 {
@@ -19,6 +15,8 @@ namespace Bandwidth.Net.Model
 
         protected BaseModelObject(BandwidthRestClient client, String parentUri, JObject jsonObject)
         {
+            //Todo:parenturi is not used.. should it be removed..
+            //this.parentUri = parentUri
             this.client = client;
             UpdateProperties(jsonObject);
         }

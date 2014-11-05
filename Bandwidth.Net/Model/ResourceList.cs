@@ -27,7 +27,7 @@ namespace Bandwidth.Net.Model
         protected T clazz;
         protected String resourceUri;
 
-        private IBandwidthClient client;
+        Client client;
 
         public ResourceList(String resourceUri, T clazz) : base()
         {

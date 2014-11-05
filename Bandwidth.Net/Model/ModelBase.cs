@@ -24,84 +24,89 @@ namespace Bandwidth.Net.Model
                 }
             }
         }
+
         public string GetId()
         {
             return GetPropertyAsString("id");
         }
-        protected internal string GetPropertyAsString(string key)
+
+        protected string GetPropertyAsString(string key)
         {
-            object value = null;
-            properties.TryGetValue(key, out value);
-            return (string)value;
+            object dictionaryKeysValue;
+            properties.TryGetValue(key, out dictionaryKeysValue);
+            return (string)dictionaryKeysValue;
         }
+
         protected string[] GetPropertyAsStringArray(string key)
         {
             if (properties.ContainsKey(key))
             {
-                object o = null;
-                properties.TryGetValue(key, out o);
-                List<object> list = (List<object>)o;
+                object dictionaryValue;
+                properties.TryGetValue(key, out dictionaryValue);
+                List<object> list = (List<object>) dictionaryValue;
 
-                string[] arr = new string[list.Count];
-                for (int i = 0; i < list.Count; i++)
+                if (list != null)
                 {
-                    object obj = list[i];
-                    arr[i] = obj.ToString();
+                    string[] arr = new string[list.Count];
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        object obj = list[i];
+                        arr[i] = obj.ToString();
+                    }
+                    return arr;
                 }
-                return arr;
+                else
+                    return null;
             }
             else
-            {
                 return null;
-            }
         }
 
         protected Object GetProperty(String key)
         {
-            Object o = null;
-            properties.TryGetValue(key, out o);
-            return o;
+            Object dictionaryValue = null;
+            properties.TryGetValue(key, out dictionaryValue);
+            return dictionaryValue;
         }
 
         protected Boolean? GetPropertyAsBoolean(String key)
         {
-            Object o = null;
-            properties.TryGetValue(key, out o);
-            if (o == null)
+            Object dictionaryValue = null;
+            properties.TryGetValue(key, out dictionaryValue);
+            if (dictionaryValue == null)
                 return null;
-            if (o is Boolean)
-                return (Boolean)o;
+            if (dictionaryValue is Boolean)
+                return (Boolean) dictionaryValue;
             else
-                return o.Equals("true");
+                return dictionaryValue.Equals("true");
         }
 
         protected long GetPropertyAsLong(String key)
         {
             object value;
             properties.TryGetValue(key, out value);
-            return (long)value;
+            return (long) value;
         }
 
         protected Double GetPropertyAsDouble(String key)
         {
-            Object o;
-            properties.TryGetValue(key, out o);
+            Object dictionaryValue;
+            properties.TryGetValue(key, out dictionaryValue);
 
-            if (o is Double)
-                return (Double)o;
+            if (dictionaryValue is Double)
+                return (Double)dictionaryValue;
             else
-                return Convert.ToDouble(o);
+                return Convert.ToDouble(dictionaryValue);
         }
 
         protected DateTime? GetPropertyAsDate(String key)
         {
-            Object o;
-            properties.TryGetValue(key, out o);
-            if (o == null) return null;
-            if (o is long) return new DateTime((long)o);
+            Object dictionaryValue;
+            properties.TryGetValue(key, out dictionaryValue);
+            if (dictionaryValue == null) return null;
+            if (dictionaryValue is long) return new DateTime((long) dictionaryValue);
 
-            return DateTime.ParseExact(o.ToString(), BandwidthConstants.TRANSACTION_DATE_TIME_PATTERN, null);
-
+            return DateTime.ParseExact(dictionaryValue.ToString(), BandwidthConstants.TRANSACTION_DATE_TIME_PATTERN, null);
         }
 
         protected void PutProperty(String key, Object value)

@@ -11,7 +11,7 @@ namespace Bandwidth.Net
     //TODO: This class is simliar to BandwidthRestClient class move common code in one class
     public class BandwidthClient
     {
-         protected static readonly String GET = "get";
+        protected static readonly String GET = "get";
         protected static readonly String POST = "post";
         protected static readonly String PUT = "put";
         protected static readonly String DELETE = "delete";
@@ -39,7 +39,7 @@ namespace Bandwidth.Net
         {
             if (INSTANCE == null)
             {
-                //TODO:Read the emvironment variables here, since this is portale library we cannot acess Enviorment.GetEnviormentVariables.
+                //TODO:Read the environment variables here, since this is portable library we cannot acess Enviorment.GetEnviormentVariables.
                 String userId, apiToken, apiSecret, apiEndpoint, apiVersion;
                 userId = apiToken = apiSecret = apiEndpoint = apiVersion = null;
 
@@ -86,7 +86,7 @@ namespace Bandwidth.Net
             Uri fullUri = BuildUri(path, pairs);
 
             WebRequest httpWebRequest = HttpWebRequest.Create(fullUri);
-            
+
             SetHeaders(httpWebRequest);
             //TODO:need to make the getrequest and get the response and depend on the response create the restresponse
             //HttpWebResponse httpResponse = HttpWebResponse.

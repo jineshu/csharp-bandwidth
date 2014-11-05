@@ -6,15 +6,19 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Bandwidth.Net.Clients;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 namespace Bandwidth.Net
 {
-    public sealed class Client : IDisposable
+    public interface Client //: IDisposable
     {
+        RestResponse Get(String uri, Dictionary<String, Object> param);
+
+        /*
+         * 
+         * 
         private readonly HttpClient _client;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
         private readonly string _userPath;
@@ -219,5 +223,7 @@ namespace Bandwidth.Net
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
             return (path[0] == '/') ? path.Substring(1) : path;
         }
+    }
+      */
     }
 }
