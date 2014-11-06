@@ -152,10 +152,10 @@ namespace Bandwidth.Net
 
             RestResponse response = Request(path, GET, param);
 
-            if (response.IsError()) throw new IOException(response.GetResponseText());
+            if (response.IsError()) throw new IOException(response.ResponseText);
 
             if (response.IsJson())
-                return JArray.Parse(response.GetResponseText());
+                return JArray.Parse(response.ResponseText);
             else
                 throw new IOException("Response is not a JSON format.");
         }
@@ -171,10 +171,10 @@ namespace Bandwidth.Net
         {
             RestResponse response = Request(locationUrl, GET);
             if (response.IsError())
-                throw new IOException(response.GetResponseText());
+                throw new IOException(response.ResponseText);
 
             if (response.IsJson())
-                return JObject.Parse(response.GetResponseText());
+                return JObject.Parse(response.ResponseText);
 
             else
                 throw new IOException("Response is not a JSON format.");
@@ -184,16 +184,16 @@ namespace Bandwidth.Net
         {
             String path = GetPath(uri);
             RestResponse response = Request(path, POST, param);
-            if (response.IsError()) throw new IOException(response.GetResponseText());
+            if (response.IsError()) throw new IOException(response.ResponseText);
 
-            String location = response.GetLocation();
+            String location = response.Location;
             if (location != null)
             {
                 response = Request(location, GET);
-                if (response.IsError()) throw new IOException(response.GetResponseText());
+                if (response.IsError()) throw new IOException(response.ResponseText);
 
                 if (response.IsJson())
-                    return JObject.Parse(response.GetResponseText());
+                    return JObject.Parse(response.ResponseText);
                 else
                     throw new IOException("Response is not a JSON format.");
             }
@@ -205,7 +205,7 @@ namespace Bandwidth.Net
         {
             String path = GetPath(uri);
             RestResponse response = Request(path, POST, param);
-            if (response.IsError()) throw new IOException(response.GetResponseText());
+            if (response.IsError()) throw new IOException(response.ResponseText);
 
             return response;
         }
@@ -214,7 +214,7 @@ namespace Bandwidth.Net
         {
             String path = GetPath(uri);
             RestResponse response = Request(path, DELETE);
-            if (response.IsError()) throw new IOException(response.GetResponseText());
+            if (response.IsError()) throw new IOException(response.ResponseText);
         }
 
 
@@ -294,13 +294,13 @@ namespace Bandwidth.Net
 
             RestResponse restResponse = new RestResponse(responseBody, statusCode);
 
-            restResponse.SetStatus((int) response.StatusCode);
+            restResponse.Status=(int) response.StatusCode;
 
             string contentType = response.Headers["Content-Type"];
-            restResponse.SetContentType(contentType);
+            restResponse.ContentType=contentType;
 
             string location = response.Headers["Location"];
-            restResponse.SetLocation(location);
+            restResponse.Location=location;
 
             return restResponse;
         }

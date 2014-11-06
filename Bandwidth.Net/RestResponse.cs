@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 
 namespace Bandwidth.Net
@@ -24,20 +23,18 @@ namespace Bandwidth.Net
 
         public RestResponse(String text, int status)
         {
-            this.responseText = text;
-            this.error = (status >= 400);
+            responseText = text;
+            error = (status >= 400);
             this.status = status;
         }
 
         public static RestResponse CreateRestResponse(HttpWebResponse httpResponse)
         {
-
             RestResponse restResponse = new RestResponse();
 
-            restResponse.SetStatus((int)httpResponse.StatusCode);
+            restResponse.Status=(int)httpResponse.StatusCode;
 
             String httpresponseText = "";
-
 
             using (var reader = new System.IO.StreamReader(httpResponse.GetResponseStream()))
             {
@@ -47,38 +44,34 @@ namespace Bandwidth.Net
             if (httpresponseText.Length == 0)
                 httpresponseText = "{}";
 
-
-            // TODO There are several more error conditions that should be handled. 
             if (httpresponseText.Contains("access-denied"))
                 restResponse.SetError(true);
-            else if (restResponse.GetStatus() >= 400)
+            else if (restResponse.Status >= 400)
                 restResponse.SetError(true);
 
-            restResponse.SetResponseText(httpresponseText);
+            restResponse.ResponseText=httpresponseText;
 
             foreach (var header in httpResponse.Headers["Content-Type"])
             {
-                restResponse.SetContentType(header.ToString());
+                restResponse.ContentType=header.ToString();
             }
-
 
             foreach (var header in httpResponse.Headers["Location"])
             {
-                restResponse.SetLocation(header.ToString());
+                restResponse.Location=header.ToString();
             }
 
             foreach (var header in httpResponse.Headers["Link"])
             {
                 restResponse.ParseLinkHeader(header.ToString());
             }
-
-
             return restResponse;
         }
 
-        public void SetStatus(int status)
+        public int Status
         {
-            this.status = status;
+            get { return status; }
+            set { status = value; }
         }
 
         public void SetError(Boolean error)
@@ -86,19 +79,15 @@ namespace Bandwidth.Net
             this.error = error;
         }
 
-        public int GetStatus()
+        public String ResponseText
         {
-            return status;
+            get { return responseText; }
+            set { responseText = value; }
         }
-
-        public void SetResponseText(String responseText)
+        public String ContentType
         {
-            this.responseText = responseText;
-        }
-
-        public String GetResponseText()
-        {
-            return responseText;
+            get { return contentType; }
+            set { contentType = value; }
         }
 
         public Boolean IsError()
@@ -106,29 +95,15 @@ namespace Bandwidth.Net
             return error;
         }
 
-        public void SetContentType(String contentType)
-        {
-            this.contentType = contentType;
-        }
-
         public Boolean IsJson()
         {
             return (this.contentType.ToLower().Contains("application/json"));
         }
 
-        public String GetLocation()
+        public String Location
         {
-            return location;
-        }
-
-        public void SetLocation(String location)
-        {
-            this.location = location;
-        }
-
-        public String GetContentType()
-        {
-            return contentType;
+            get { return location; }
+            set { location = value; }
         }
 
         public void ParseLinkHeader(String link)
@@ -186,6 +161,5 @@ namespace Bandwidth.Net
             get { return previousLink; }
             set { previousLink = value; }
         }
-
     }
 }

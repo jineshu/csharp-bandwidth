@@ -12,11 +12,11 @@ namespace Bandwidth.Net
     {
         public static JArray Response2JSONArray(RestResponse response)
         {
-            if (response.IsJson() && response.GetResponseText() != null)
+            if (response.IsJson() && response.ResponseText != null)
             {
                 try
                 {
-                    return JArray.Parse(response.GetResponseText());
+                    return JArray.Parse(response.ResponseText);
                 }
                 catch (InvalidOperationException ex)
                 {
